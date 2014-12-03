@@ -11,6 +11,7 @@
 #import "MPMessagePack.h"
 #import "MessageHeader.h"
 #import "CreateMessage.h"
+#import "Log.h"
 @interface Parser ()
 {
     dispatch_queue_t parserQueue;

@@ -8,6 +8,7 @@
 
 #import "DoRegister.h"
 #import "HttpRequest.h"
+#import "Log.h"
 
 @interface DoRegister ()
 {
@@ -58,9 +59,26 @@
     NSDictionary *headerDic = @{@"Content-Type":@"application/json;charset=UTF-8", @"Accept-Charset":@"UTF-8"};
     [httpRequest addHeadersWithDictionary:headerDic];
     [httpRequest startRequtstWithSuccess:^(NSData *result) {
-        if (_delegate && [_delegate respondsToSelector:@selector(registerDidSuccessWithResult:)]) {
-            [_delegate registerDidSuccessWithResult:[[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding]];
+        if (result) {
+            NSError *error = nil;
+            id re = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+            if (!error) {
+                if ([re isKindOfClass:[NSDictionary class]] && re[@"errcode"] != nil) {
+                    if (_delegate && [_delegate respondsToSelector:@selector(registerDidFailWithType:reason:)]) {
+                        [_delegate registerDidFailWithType:[re[@"errcode"] intValue] reason:re[@"errmsg"]];
+                    }
+                }else{
+                    if (_delegate && [_delegate respondsToSelector:@selector(registerDidSuccessWithResult:)]) {
+                        [_delegate registerDidSuccessWithResult:[[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding]];
+                    }
+                }
+            }else{
+                DDLogError(@"%@", error);
+            }
+        }else{
+            DDLogError(@"rigister result is nil");
         }
+        
     } fail:^(NSError *error) {
         if (_delegate && [_delegate respondsToSelector:@selector(registerDidFailWithType:reason:)]) {
             [_delegate registerDidFailWithType:(int)error.code reason:error.localizedDescription];

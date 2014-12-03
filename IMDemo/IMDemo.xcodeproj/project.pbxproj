@@ -49,6 +49,14 @@
 		8B11D4771A2C33DF00DE8A39 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D44E1A2C33DF00DE8A39 /* DDLog.m */; };
 		8B11D4781A2C33DF00DE8A39 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4501A2C33DF00DE8A39 /* DDTTYLogger.m */; };
 		8B11D4791A2C33DF00DE8A39 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4531A2C33DF00DE8A39 /* HttpRequest.m */; };
+		8B11D4851A2C386F00DE8A39 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4831A2C386F00DE8A39 /* LoginViewController.m */; };
+		8B11D4861A2C386F00DE8A39 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B11D4841A2C386F00DE8A39 /* LoginViewController.xib */; };
+		8B11D4911A2C79BD00DE8A39 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4901A2C79BD00DE8A39 /* Keychain.m */; };
+		8B11D4961A2D9E2A00DE8A39 /* header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B11D4951A2D9E2A00DE8A39 /* header.jpg */; };
+		8B11D49D1A2DA52800DE8A39 /* GroupListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D49B1A2DA52800DE8A39 /* GroupListTableViewController.m */; };
+		8B11D49E1A2DA52800DE8A39 /* GroupListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B11D49C1A2DA52800DE8A39 /* GroupListTableViewController.xib */; };
+		8B11D4A11A2DAD4E00DE8A39 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4A01A2DAD4E00DE8A39 /* Group.m */; };
+		8B11D4A41A2DAD7C00DE8A39 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B11D4A31A2DAD7C00DE8A39 /* Contact.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +158,20 @@
 		8B11D4501A2C33DF00DE8A39 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		8B11D4521A2C33DF00DE8A39 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		8B11D4531A2C33DF00DE8A39 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		8B11D4821A2C386F00DE8A39 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		8B11D4831A2C386F00DE8A39 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		8B11D4841A2C386F00DE8A39 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		8B11D48F1A2C79BD00DE8A39 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
+		8B11D4901A2C79BD00DE8A39 /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
+		8B11D4931A2D960600DE8A39 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		8B11D4951A2D9E2A00DE8A39 /* header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = header.jpg; sourceTree = "<group>"; };
+		8B11D49A1A2DA52800DE8A39 /* GroupListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTableViewController.h; sourceTree = "<group>"; };
+		8B11D49B1A2DA52800DE8A39 /* GroupListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListTableViewController.m; sourceTree = "<group>"; };
+		8B11D49C1A2DA52800DE8A39 /* GroupListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupListTableViewController.xib; sourceTree = "<group>"; };
+		8B11D49F1A2DAD4E00DE8A39 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		8B11D4A01A2DAD4E00DE8A39 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		8B11D4A21A2DAD7C00DE8A39 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		8B11D4A31A2DAD7C00DE8A39 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +217,11 @@
 				8B11D3B11A2C210B00DE8A39 /* AppDelegate.h */,
 				8B11D3B21A2C210B00DE8A39 /* AppDelegate.m */,
 				8B11D3B41A2C210B00DE8A39 /* Images.xcassets */,
+				8B11D4941A2D9E2A00DE8A39 /* images */,
+				8B11D4811A2C384A00DE8A39 /* View */,
+				8B11D4801A2C382600DE8A39 /* Model */,
+				8B11D47F1A2C381100DE8A39 /* ViewController */,
+				8B11D48B1A2C55A600DE8A39 /* TheThirdClass */,
 				8B11D3AD1A2C210B00DE8A39 /* Supporting Files */,
 			);
 			path = IMDemo;
@@ -235,7 +262,7 @@
 				8B11D4361A2C33DF00DE8A39 /* Register */,
 				8B11D4391A2C33DF00DE8A39 /* socket */,
 				8B11D4411A2C33DF00DE8A39 /* Tools */,
-				8B11D4461A2C33DF00DE8A39 /* vendor */,
+				8B11D4461A2C33DF00DE8A39 /* DDLog */,
 				8B11D4511A2C33DF00DE8A39 /* WebServer */,
 			);
 			path = SDK;
@@ -350,7 +377,7 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		8B11D4461A2C33DF00DE8A39 /* vendor */ = {
+		8B11D4461A2C33DF00DE8A39 /* DDLog */ = {
 			isa = PBXGroup;
 			children = (
 				8B11D4471A2C33DF00DE8A39 /* DDAbstractDatabaseLogger.h */,
@@ -363,7 +390,9 @@
 				8B11D44E1A2C33DF00DE8A39 /* DDLog.m */,
 				8B11D44F1A2C33DF00DE8A39 /* DDTTYLogger.h */,
 				8B11D4501A2C33DF00DE8A39 /* DDTTYLogger.m */,
+				8B11D4931A2D960600DE8A39 /* Log.h */,
 			);
+			name = DDLog;
 			path = vendor;
 			sourceTree = "<group>";
 		};
@@ -374,6 +403,54 @@
 				8B11D4531A2C33DF00DE8A39 /* HttpRequest.m */,
 			);
 			path = WebServer;
+			sourceTree = "<group>";
+		};
+		8B11D47F1A2C381100DE8A39 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B11D4821A2C386F00DE8A39 /* LoginViewController.h */,
+				8B11D4831A2C386F00DE8A39 /* LoginViewController.m */,
+				8B11D4841A2C386F00DE8A39 /* LoginViewController.xib */,
+				8B11D49A1A2DA52800DE8A39 /* GroupListTableViewController.h */,
+				8B11D49B1A2DA52800DE8A39 /* GroupListTableViewController.m */,
+				8B11D49C1A2DA52800DE8A39 /* GroupListTableViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8B11D4801A2C382600DE8A39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B11D49F1A2DAD4E00DE8A39 /* Group.h */,
+				8B11D4A01A2DAD4E00DE8A39 /* Group.m */,
+				8B11D4A21A2DAD7C00DE8A39 /* Contact.h */,
+				8B11D4A31A2DAD7C00DE8A39 /* Contact.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8B11D4811A2C384A00DE8A39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B11D48B1A2C55A600DE8A39 /* TheThirdClass */ = {
+			isa = PBXGroup;
+			children = (
+				8B11D48F1A2C79BD00DE8A39 /* Keychain.h */,
+				8B11D4901A2C79BD00DE8A39 /* Keychain.m */,
+			);
+			path = TheThirdClass;
+			sourceTree = "<group>";
+		};
+		8B11D4941A2D9E2A00DE8A39 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8B11D4951A2D9E2A00DE8A39 /* header.jpg */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,7 +533,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B11D4861A2C386F00DE8A39 /* LoginViewController.xib in Resources */,
 				8B11D3B51A2C210B00DE8A39 /* Images.xcassets in Resources */,
+				8B11D49E1A2DA52800DE8A39 /* GroupListTableViewController.xib in Resources */,
+				8B11D4961A2D9E2A00DE8A39 /* header.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,18 +561,22 @@
 				8B11D4741A2C33DF00DE8A39 /* DDAbstractDatabaseLogger.m in Sources */,
 				8B11D45D1A2C33DF00DE8A39 /* Message.m in Sources */,
 				8B11D4781A2C33DF00DE8A39 /* DDTTYLogger.m in Sources */,
+				8B11D4A41A2DAD7C00DE8A39 /* Contact.m in Sources */,
 				8B11D46F1A2C33DF00DE8A39 /* ConnectSocket.m in Sources */,
 				8B11D3B31A2C210B00DE8A39 /* AppDelegate.m in Sources */,
 				8B11D4611A2C33DF00DE8A39 /* ReceiptCmdMessage.m in Sources */,
 				8B11D46E1A2C33DF00DE8A39 /* DoRegister.m in Sources */,
+				8B11D4A11A2DAD4E00DE8A39 /* Group.m in Sources */,
 				8B11D45C1A2C33DF00DE8A39 /* MenuEventChatMessage.m in Sources */,
 				8B11D4621A2C33DF00DE8A39 /* RequestMessage.m in Sources */,
 				8B11D4731A2C33DF00DE8A39 /* Tools.m in Sources */,
 				8B11D4701A2C33DF00DE8A39 /* GCDAsyncSocket.m in Sources */,
+				8B11D4911A2C79BD00DE8A39 /* Keychain.m in Sources */,
 				8B11D4571A2C33DF00DE8A39 /* CreateMessage.m in Sources */,
 				8B11D45B1A2C33DF00DE8A39 /* ImageChatMessage.m in Sources */,
 				8B11D4661A2C33DF00DE8A39 /* VideoChatMessage.m in Sources */,
 				8B11D4551A2C33DF00DE8A39 /* ChatMessage.m in Sources */,
+				8B11D4851A2C386F00DE8A39 /* LoginViewController.m in Sources */,
 				8B11D4771A2C33DF00DE8A39 /* DDLog.m in Sources */,
 				8B11D4711A2C33DF00DE8A39 /* Parser.m in Sources */,
 				8B11D46C1A2C33DF00DE8A39 /* NSArray+MPMessagePack.m in Sources */,
@@ -505,6 +589,7 @@
 				8B11D4591A2C33DF00DE8A39 /* GroupUserDelCmdMessage.m in Sources */,
 				8B11D45F1A2C33DF00DE8A39 /* NewsChatMessage.m in Sources */,
 				8B11D4721A2C33DF00DE8A39 /* Reachability.m in Sources */,
+				8B11D49D1A2DA52800DE8A39 /* GroupListTableViewController.m in Sources */,
 				8B11D4541A2C33DF00DE8A39 /* GroupHandle.m in Sources */,
 				8B11D3B01A2C210B00DE8A39 /* main.m in Sources */,
 				8B11D4791A2C33DF00DE8A39 /* HttpRequest.m in Sources */,
@@ -617,6 +702,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "";
 				INFOPLIST_FILE = IMDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -629,6 +715,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "";
 				INFOPLIST_FILE = IMDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

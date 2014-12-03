@@ -8,7 +8,7 @@
 
 #import "GroupHandle.h"
 #import "HttpRequest.h"
-#import "Socket.h"
+#import "Log.h"
 
 #define kGroupCreate @"/api/group/create"
 #define kGroupAdd @"/api/group/add/"

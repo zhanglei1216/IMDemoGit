@@ -5,16 +5,12 @@
 //  Created by foreveross－bj on 14-10-29.
 //  Copyright (c) 2014年 foreveross－bj. All rights reserved.
 //
-#import "DDLog.h"
-#import "DDTTYLogger.h"
 
 #define kHeaderLength 5
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
-
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 enum SocketErrorCode{
     SocketClientFailConnect = 20,

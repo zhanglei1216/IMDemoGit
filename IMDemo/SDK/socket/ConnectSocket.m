@@ -9,6 +9,7 @@
 #import "ConnectSocket.h"
 #import "Reachability.h"
 #import "Socket.h"
+#import "Log.h"
 
 
 #define MIN_KEEPALIVE_INTERVAL (4 * 60)

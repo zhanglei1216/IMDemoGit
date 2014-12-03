@@ -7,9 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "GroupListTableViewController.h"
 
 @interface AppDelegate ()
-
+{
+    LoginViewController *loginVC;
+}
 @end
 
 @implementation AppDelegate
@@ -19,6 +23,24 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    loginVC = [[LoginViewController alloc] init];
+    GroupListTableViewController *groupListVC = [[GroupListTableViewController alloc] init];
+     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:groupListVC];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]) {
+        [loginVC loginWithUserName:[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"] password:[[NSUserDefaults standardUserDefaults] objectForKey:@"password"]];
+        self.window.rootViewController = navigation;
+    }else{
+        self.window.rootViewController = loginVC;
+        __weak AppDelegate *appDelegate = self;
+        loginVC.completion = ^(){
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                appDelegate.window.rootViewController = navigation;
+            });
+        };
+    }
+//    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userName"];
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
