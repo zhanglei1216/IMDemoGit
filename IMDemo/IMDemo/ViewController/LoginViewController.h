@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DoRegister.h"
-#import "ConnectSocket.h"
+#import "IMHeader.h"
 
 @interface LoginViewController : UIViewController <registerDelegate, SocketDelegate>
 @property (nonatomic, copy) void (^ completion)(void);
