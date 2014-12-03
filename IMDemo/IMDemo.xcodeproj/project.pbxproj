@@ -172,6 +172,7 @@
 		8B11D4A01A2DAD4E00DE8A39 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		8B11D4A21A2DAD7C00DE8A39 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		8B11D4A31A2DAD7C00DE8A39 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		8B3F01B91A2EEBA200DD8555 /* IMHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +257,7 @@
 		8B11D3FC1A2C33DF00DE8A39 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				8B3F01B91A2EEBA200DD8555 /* IMHeader.h */,
 				8B11D3FD1A2C33DF00DE8A39 /* Group */,
 				8B11D4001A2C33DF00DE8A39 /* Model */,
 				8B11D4281A2C33DF00DE8A39 /* MPMessagePack */,
