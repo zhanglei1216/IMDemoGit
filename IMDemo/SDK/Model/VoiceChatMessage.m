@@ -7,7 +7,6 @@
 //
 
 #import "VoiceChatMessage.h"
-
 @implementation VoiceChatMessage
 /**
  * @param Id

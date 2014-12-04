@@ -36,7 +36,7 @@
  * convert to data
  **/
 - (NSData *)data{
-    NSDictionary *dic = @{@"id":[Tools sEmpty:self.Id], @"msgType":[NSNumber numberWithUnsignedChar:self.msgType], @"from":[Tools sEmpty:self.from], @"to": [Tools sEmpty:self.to], @"thumbContent":[Tools bEmpty:self.thumbContent], @"timestamp":@(self.timestamp)};
+    NSDictionary *dic = @{@"id":[Tools sEmpty:self.Id], @"msgType":[NSNumber numberWithUnsignedChar:self.msgType], @"from":[Tools sEmpty:self.from], @"to": [Tools sEmpty:self.to], @"thumbContent":[Tools bEmpty:self.thumbContent], @"mediaId":[Tools sEmpty:self.mediaId], @"timestamp":@(self.timestamp)};
     return dic.mp_messagePack;
 }
 @end
