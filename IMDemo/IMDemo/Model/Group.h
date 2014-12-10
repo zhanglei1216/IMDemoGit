@@ -10,4 +10,12 @@
 
 @interface Group : NSObject
 
+@property (nonatomic, strong) NSString *accountUid;
+@property (nonatomic, strong) NSNumber *createDate;
+@property (nonatomic, strong) NSString *modifyDate;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *status;
+@property (nonatomic, strong) NSString *uid;
+@property (nonatomic, strong) NSNumber *userCount;
+@property (nonatomic) BOOL isOpen;
 @end

@@ -134,8 +134,6 @@ static unsigned int numProcessors;
 		
 		loggers = [[NSMutableArray alloc] initWithCapacity:4];
 		
-		NSLogDebug(@"DDLog: Using grand central dispatch");
-		
 		loggingQueue = dispatch_queue_create("cocoa.lumberjack", NULL);
 		loggingGroup = dispatch_group_create();
 		
@@ -154,9 +152,6 @@ static unsigned int numProcessors;
 		unsigned int one    = (unsigned int)(1);
 		
 		numProcessors = MAX(result, one);
-		
-		NSLogDebug(@"DDLog: numProcessors = %u", numProcessors);
-			
 		
 	#if TARGET_OS_IPHONE
 		NSString *notificationName = @"UIApplicationWillTerminateNotification";

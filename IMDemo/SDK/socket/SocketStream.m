@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 foreveross－bj. All rights reserved.
 //
 
-#import "ConnectSocket.h"
+#import "SocketStream.h"
 #import "Reachability.h"
 #import "Socket.h"
 #import "Log.h"
@@ -16,7 +16,7 @@
 #define SEND_MESSAGE_TIMEOUT 20
 #define CONNECT_TIMEOUT 20
 
-@interface ConnectSocket ()
+@interface SocketStream ()
 {
     GCDAsyncSocket *_socket;
     void *socketQueueTag;
@@ -50,7 +50,7 @@
 @property (nonatomic, strong) Reachability *reachability;
 @end
 
-@implementation ConnectSocket
+@implementation SocketStream
 
 #pragma mark -
 #pragma mark - Initialized and Creating

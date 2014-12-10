@@ -9,5 +9,16 @@
 #import "Group.h"
 
 @implementation Group
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.isOpen = NO;
+    }
+    return self;
+}
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
 
 @end

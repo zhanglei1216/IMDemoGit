@@ -7,8 +7,12 @@
 //
 
 #import "GroupListTableViewController.h"
+#import "GroupModelHandle.h"
+#import "ContactListTableViewController.h"
 
 @interface GroupListTableViewController ()
+
+@property (nonatomic, strong) GroupModelHandle *groupModelHandle;
 
 @end
 
@@ -25,10 +29,16 @@
     self.title = @"群组";
     UIBarButtonItem *creatGroupButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createGroup)];
     self.navigationItem.rightBarButtonItem = creatGroupButton;
+    self.groupModelHandle = [[GroupModelHandle alloc] init];
+    [_groupModelHandle getGroupModelWithOptId:[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"] Completion:^(NSArray * groupArray){
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    }];
+
 }
 - (void)createGroup{
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -39,18 +49,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return [_groupModelHandle numberOfSections];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [_groupModelHandle numberOfRowsInSection:section];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"groupCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    Group *group = [_groupModelHandle modelForRowAtIndexPath:indexPath];
+    cell.textLabel.text = group.uid;
     
     // Configure the cell...
     
@@ -92,21 +109,17 @@
 }
 */
 
-/*
+
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+    ContactListTableViewController *contactListVC = [[ContactListTableViewController alloc] init];
+    contactListVC.groupId = [_groupModelHandle modelForRowAtIndexPath:indexPath].uid;
+    [self.navigationController pushViewController:contactListVC animated:YES];
     
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
 }
-*/
+
 
 /*
 #pragma mark - Navigation

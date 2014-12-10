@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IMHeader.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SocketDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) SocketStream *socket;
 
 @end
 

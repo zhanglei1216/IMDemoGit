@@ -8,4 +8,4 @@
 #import "messageHeader.h"
 #import "GroupHandle.h"
 #import "DoRegister.h"
-#import "ConnectSocket.h"
+#import "SocketStream.h"

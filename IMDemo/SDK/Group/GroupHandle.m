@@ -45,6 +45,8 @@
         self.delegate = delegate;
         groupWillOprationQueue = dispatch_get_global_queue(0, 0);
         self.headerDic = @{@"Content-Type":@"application/json;charset=UTF-8", @"Accept-Charset":@"UTF-8"};
+        [DDLog removeAllLoggers];
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
     }
     return self;
 }
@@ -101,12 +103,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidCreateFailWithType:reason:)]) {
                         [_delegate groupDidCreateFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidCreateSuccessOptId:ids:result:)]) {
                         [_delegate groupDidCreateSuccessOptId:optId ids:ids result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -156,12 +158,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidAddMemberFailWithType:reason:)]) {
                         [_delegate groupDidAddMemberFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidAddMemberSuccessWithOptId:gid:ids:result:)]) {
                         [_delegate groupDidAddMemberSuccessWithOptId:optId gid:gid ids:ids result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -208,12 +210,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetUserGroupsInfoFailWithType:reason:)]) {
                         [_delegate groupDidGetUserGroupsInfoFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetUserGroupsSuccessWithOptId:Info:)]) {
                         [_delegate groupDidGetUserGroupsSuccessWithOptId:optId Info:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -259,12 +261,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetGroupInfoFailWithType:reason:)]) {
                         [_delegate groupDidGetGroupInfoFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetGroupInfoSuccessWithGroupId:info:)]) {
                         [_delegate groupDidGetGroupInfoSuccessWithGroupId:groupId info:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -309,12 +311,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetGroupDetailInfoFailWithType:reason:)]) {
                         [_delegate groupDidGetGroupDetailInfoFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetGroupDetailInfoSuccessWithGroupId:detailInfo:)]) {
                         [_delegate groupDidGetGroupDetailInfoSuccessWithGroupId:groupId detailInfo:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -363,12 +365,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidDeleteGroupMemberFailWithType:reason:)]) {
                         [_delegate groupDidDeleteGroupMemberFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidDeleteGroupMemberSuccessWithGroupId:optId:deleteId:result:)]) {
                         [_delegate groupDidDeleteGroupMemberSuccessWithGroupId:groupId optId:optId deleteId:deleteId result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -414,12 +416,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidQueryFailWithType:reason:)]) {
                         [_delegate groupDidQueryFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidQuerySuccessWithGroupId:result:)]) {
                         [_delegate groupDidQuerySuccessWithGroupId:groupId result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -471,12 +473,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidQueryGroupMemberAccountOrUidFailWithType:reason:)]) {
                         [_delegate groupDidQueryGroupMemberAccountOrUidFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidQueryGroupMemberAccountOrUidSuccessWithGroupId:type:optId:result:)]) {
                         [_delegate groupDidQueryGroupMemberAccountOrUidSuccessWithGroupId:groupId type:type optId:optId result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -528,12 +530,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidSetGroupInfoFailWithType:reason:)]) {
                         [_delegate groupDidSetGroupInfoFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidSetGroupInfoSuccessWithGroupId:groupInfo:result:)]) {
                         [_delegate groupDidSetGroupInfoSuccessWithGroupId:groupId groupInfo:groupInfo result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");
@@ -589,12 +591,12 @@
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidPersonalizedSettingsFailWithType:reason:)]) {
                         [_delegate groupDidPersonalizedSettingsFailWithType:[resultDic[@"errcode"] intValue] reason:resultDic[@"errmsg"]];
                     }
+                    DDLogError(@"%@", resultDic.description);
                 }else{
                     if (_delegate && [_delegate respondsToSelector:@selector(groupDidPersonalizedSettingsSuccessWithGroupId:optId:settings:result:)]) {
                         [_delegate groupDidPersonalizedSettingsSuccessWithGroupId:groupId optId:optId settings:settings result:resultDic];
                     }
                 }
-                DDLogInfo(@"%@", resultDic);
             }
         }else{
             DDLogWarn(@"create group result is nil");

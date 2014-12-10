@@ -9,5 +9,7 @@
 #import "Contact.h"
 
 @implementation Contact
-
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
 @end

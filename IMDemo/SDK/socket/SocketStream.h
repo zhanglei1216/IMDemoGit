@@ -56,7 +56,7 @@
 - (void)authorizeDidFailWithType:(int)type reason:(NSString *)reason;
 @end
 
-@interface ConnectSocket : NSObject <GCDAsyncSocketDelegate, ParserDelegate>
+@interface SocketStream : NSObject <GCDAsyncSocketDelegate, ParserDelegate>
 
 
 #pragma mark - 

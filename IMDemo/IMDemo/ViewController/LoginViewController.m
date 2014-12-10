@@ -11,20 +11,15 @@
 #import "Keychain.h"
 #import "MessageHeader.h"
 
-#define kUrl @"http://192.168.0.86:8080/api/client/register"
 
 @interface LoginViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UITextField *userTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UILabel *loginLabel;
-
 @property (strong, nonatomic) DoRegister *doRegister;
-@property (strong, nonatomic) NSString *token;
-@property (strong, nonatomic) NSString *host;
-@property (nonatomic) int port;
-@property (strong, nonatomic) ConnectSocket *socket;
-
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *password;
 @end
 
 @implementation LoginViewController
@@ -32,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.socket = [[ConnectSocket alloc] initWithDelegate:self];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login)];
     [_loginLabel addGestureRecognizer:tapGesture];
     self.doRegister = [[DoRegister alloc] initWithDelegate:self];
@@ -77,6 +72,8 @@
     [self keyBoardWillHide:nil];
 }
 - (void)loginWithUserName:(NSString *)userName password:(NSString *)password{
+    self.userName = userName;
+    self.password = password;
     NSString *appId = nil;
     if ([Keychain readAppId]) {
         appId = [Keychain readAppId];
@@ -93,9 +90,7 @@
     }
     
     NSString *JSONParam = [NSString stringWithFormat:@"{ \"appId\": \"MYAPPID\", \"deviceId\": \"%@\", \"secret\":\"MYSECRET\",\"devicePlatform\":\"iOS\",\"ssl\":\"true\",\"username\": \"%@\", \"password\":\"%@\", \"encryption\": \"true\"}", UDID, userName, [Tools encode:password]];
-    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"userName"];
-    [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
-    [_doRegister registerWithURL:kUrl jsonParam:JSONParam];
+    [_doRegister registerWithURL:[NSString stringWithFormat:@"%@%@", kUrl, @"/api/client/register"] jsonParam:JSONParam];
 }
 
 - (void)registerWillBegin{
@@ -103,10 +98,11 @@
 }
 - (void)registerDidSuccessWithResult:(NSString *)result{
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    _host = dic[@"host"];
-    _token = dic[@"sessionToken"];
-    _port = [dic[@"port"] intValue];
-    [_socket connectWithIp:_host port:_port];
+    [[NSUserDefaults standardUserDefaults] setObject:_userName forKey:@"userName"];
+    [[NSUserDefaults standardUserDefaults] setObject:_password forKey:@"password"];
+    if (_completion) {
+        _completion(dic);
+    }
 }
 - (void)registerDidFailWithType:(int)type reason:(NSString *)reason{
     NSLog(@"%d %@", type, reason);
@@ -115,29 +111,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)connectWillBegin{
-    NSLog(@"connectWillBegin");
-}
-- (void)connectDidSuccess{
-    TokenRequestMessage *tokenMessage = [[TokenRequestMessage alloc] initWithId:[[NSUUID UUID] UUIDString] token:_token];
-    [_socket authorizeWithMessage:tokenMessage];
-}
-- (void)authorizeWillBegin{
-    NSLog(@"authorizeWillBegin");
-}
-- (void)authorizeDidSuccess{
-    NSLog(@"authorizeDidSuccess");
-    if (_completion) {
-        _completion();
-    }
-    
-}
-- (void)authorizeTimeout{
-    NSLog(@"authorizeTimeout");
-}
-- (void)authorizeDidFailWithType:(int)type reason:(NSString *)reason{
-    NSLog(@"authorizeDidFailWithType %d, %@", type, reason);
-}
+
 
 /*
 #pragma mark - Navigation

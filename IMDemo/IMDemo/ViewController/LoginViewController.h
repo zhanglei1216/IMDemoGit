@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "IMHeader.h"
 
-@interface LoginViewController : UIViewController <registerDelegate, SocketDelegate>
-@property (nonatomic, copy) void (^ completion)(void);
+@interface LoginViewController : UIViewController <registerDelegate>
+@property (nonatomic, copy) void (^ completion)(NSDictionary *result);
 
 - (void)loginWithUserName:(NSString *)userName password:(NSString *)password;
 

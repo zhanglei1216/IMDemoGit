@@ -9,11 +9,22 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "GroupListTableViewController.h"
+#import "ChatViewController.h"
+
+#define kHost [[NSUserDefaults standardUserDefaults] objectForKey:@"host"]
+#define kPort [[[NSUserDefaults standardUserDefaults] objectForKey:@"port"] intValue]
+#define kUserName [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]
+#define kToken [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]
 
 @interface AppDelegate ()
 {
     LoginViewController *loginVC;
 }
+
+@property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSString *host;
+@property (nonatomic) int port;
+
 @end
 
 @implementation AppDelegate
@@ -23,28 +34,57 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.socket = [[SocketStream alloc] initWithDelegate:self];
+    
     loginVC = [[LoginViewController alloc] init];
+    
     GroupListTableViewController *groupListVC = [[GroupListTableViewController alloc] init];
+    
      UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:groupListVC];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]) {
-        [loginVC loginWithUserName:[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"] password:[[NSUserDefaults standardUserDefaults] objectForKey:@"password"]];
+    
+    __weak AppDelegate *appDelegate = self;
+    loginVC.completion = ^(NSDictionary *result){
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            appDelegate.window.rootViewController = navigation;
+        });
+        appDelegate.host = result[@"host"];
+        appDelegate.token = result[@"sessionToken"];
+        appDelegate.port = [result[@"port"] intValue];
+        [[NSUserDefaults standardUserDefaults] setObject:result[@"host"]forKey:@"host"];
+        [[NSUserDefaults standardUserDefaults] setObject:result[@"port"]  forKey:@"port"];
+        [[NSUserDefaults standardUserDefaults] setObject:result[@"sessionToken"] forKey:@"token"];
+        [appDelegate.socket connectWithIp:appDelegate.host port:appDelegate.port];
+    };
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"userName"];
+    if (kUserName) {
         self.window.rootViewController = navigation;
+        [self.socket connectWithIp:kHost port:kPort];
     }else{
         self.window.rootViewController = loginVC;
-        __weak AppDelegate *appDelegate = self;
-        loginVC.completion = ^(){
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                appDelegate.window.rootViewController = navigation;
-            });
-        };
     }
-//    [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userName"];
-    
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
-
+- (void)connectWillBegin{
+    NSLog(@"connectWillBegin");
+}
+- (void)connectDidSuccess{
+    TokenRequestMessage *tokenMessage = [[TokenRequestMessage alloc] initWithId:[[NSUUID UUID] UUIDString] token:kToken];
+    [_socket authorizeWithMessage:tokenMessage];
+}
+- (void)authorizeWillBegin{
+    NSLog(@"authorizeWillBegin");
+}
+- (void)authorizeDidSuccess{
+    NSLog(@"authorizeDidSuccess");
+}
+- (void)authorizeTimeout{
+    NSLog(@"authorizeTimeout");
+}
+- (void)authorizeDidFailWithType:(int)type reason:(NSString *)reason{
+    NSLog(@"authorizeDidFailWithType %d, %@", type, reason);
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
