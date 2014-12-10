@@ -102,14 +102,14 @@ typedef enum GroupQueryMemberType{
  * @param ids
  * @param tag
  **/
-- (void)groupWillAddMemberWithOptId:(NSString *)optId gid:(NSString *)gid ids:(NSArray *)ids;
+- (void)groupWillAddMemberWithOptId:(NSString *)optId groupId:(NSString *)groupId ids:(NSArray *)ids;
 /**
  * @param optId
  * @param gid
  * @param ids
  * @param tag
  **/
-- (void)groupDidAddMemberSuccessWithOptId:(NSString *)optId gid:(NSString *)gid ids:(NSArray *)ids result:(NSDictionary *)result;
+- (void)groupDidAddMemberSuccessWithOptId:(NSString *)optId groupId:(NSString *)groupId ids:(NSArray *)ids result:(NSDictionary *)result;
 /**
  * @param type
  * @param reason
@@ -240,7 +240,7 @@ typedef enum GroupQueryMemberType{
  * @param gid
  * @param ids
  **/
-- (void)addGroupMembersWithOptId:(NSString *)optId gid:(NSString *)gid ids:(NSArray *)ids;
+- (void)addGroupMembersWithOptId:(NSString *)optId groupId:(NSString *)groupId ids:(NSArray *)ids;
 
 /**
  * query group members according group id.

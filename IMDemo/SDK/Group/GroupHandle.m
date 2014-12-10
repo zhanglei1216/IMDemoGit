@@ -128,20 +128,20 @@
  * @param gid
  * @param ids
  **/
-- (void)addGroupMembersWithOptId:(NSString *)optId gid:(NSString *)gid ids:(NSArray *)ids{
-    NSString *url = [NSString stringWithFormat:@"%@%@%@-%@",self.url, kGroupAdd,gid,optId];
+- (void)addGroupMembersWithOptId:(NSString *)optId groupId:(NSString *)groupId ids:(NSArray *)ids{
+    NSString *url = [NSString stringWithFormat:@"%@%@%@-%@",self.url, kGroupAdd,groupId,optId];
     NSData *data = [NSJSONSerialization dataWithJSONObject:ids options:NSJSONWritingPrettyPrinted error:nil];
     NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    if (_delegate && [_delegate respondsToSelector:@selector(groupWillAddMemberWithOptId:gid:ids:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(groupWillAddMemberWithOptId:groupId:ids:)]) {
         dispatch_async(groupWillOprationQueue, ^{@autoreleasepool{
-            [_delegate groupWillAddMemberWithOptId:optId gid:gid ids:ids];
-            [self addGroupMembersWithUrl:url json:json optId:optId gid:gid ids:ids];
+            [_delegate groupWillAddMemberWithOptId:optId groupId:groupId ids:ids];
+            [self addGroupMembersWithUrl:url json:json optId:optId groupId:groupId ids:ids];
         }
         });
     }
 }
-- (void)addGroupMembersWithUrl:(NSString *)url json:(NSString *)json optId:(NSString *)optId gid:(NSString *)gid ids:(NSArray *)ids{
+- (void)addGroupMembersWithUrl:(NSString *)url json:(NSString *)json optId:(NSString *)optId groupId:(NSString *)groupId ids:(NSArray *)ids{
     HttpRequest *httpRequest = [[HttpRequest alloc] initWithUrl:url];
     [httpRequest setHttpBody:json];
     [httpRequest setHttpMethod:@"POST"];
@@ -160,8 +160,8 @@
                     }
                     DDLogError(@"%@", resultDic.description);
                 }else{
-                    if (_delegate && [_delegate respondsToSelector:@selector(groupDidAddMemberSuccessWithOptId:gid:ids:result:)]) {
-                        [_delegate groupDidAddMemberSuccessWithOptId:optId gid:gid ids:ids result:resultDic];
+                    if (_delegate && [_delegate respondsToSelector:@selector(groupDidAddMemberSuccessWithOptId:groupId:ids:result:)]) {
+                        [_delegate groupDidAddMemberSuccessWithOptId:optId groupId:groupId ids:ids result:resultDic];
                     }
                 }
             }
