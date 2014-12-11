@@ -288,9 +288,10 @@
             [_delegate connectDidTimeout];
         }
     }else if(err.code == GCDAsyncSocketDisconnectError){
-        if (_delegate && [_delegate respondsToSelector:@selector(connectDidAbort)]) {
-            [_delegate connectDidAbort];
+        if (_delegate && [_delegate respondsToSelector:@selector(connectDidAbortWithType:reason:)]) {
+            [_delegate connectDidAbortWithType:(int)err.code reason:err.localizedDescription];
         }
+        
     }else{
         if (_delegate && [_delegate respondsToSelector:@selector(connectDidFailWithType:reason:)]) {
             [_delegate connectDidFailWithType:SocketClientConnectOtherError reason:err.localizedDescription];

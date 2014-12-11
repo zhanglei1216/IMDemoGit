@@ -212,8 +212,8 @@
                     }
                     DDLogError(@"%@", resultDic);
                 }else{
-                    if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetUserGroupsSuccessWithOptId:Info:)]) {
-                        [_delegate groupDidGetUserGroupsSuccessWithOptId:optId Info:resultDic];
+                    if (_delegate && [_delegate respondsToSelector:@selector(groupDidGetUserGroupsSuccessWithOptId:info:)]) {
+                        [_delegate groupDidGetUserGroupsSuccessWithOptId:optId info:resultDic];
                     }
                 }
             }

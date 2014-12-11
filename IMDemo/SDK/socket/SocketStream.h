@@ -25,7 +25,11 @@
 - (void)connectDidFailWithType:(int)type reason:(NSString *)reason;
 - (void)connectDidTimeout;
 - (void)connectWillAbort;
-- (void)connectDidAbort;
+/**
+ * @param type
+ * @param reason
+ **/
+- (void)connectDidAbortWithType:(int)type reason:(NSString *)reason;
 /**
  * @param message
  **/

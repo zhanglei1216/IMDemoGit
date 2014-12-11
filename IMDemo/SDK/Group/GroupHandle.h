@@ -43,7 +43,7 @@ typedef enum GroupQueryMemberType{
 /**
  * @param info
  **/
-- (void)groupDidGetUserGroupsSuccessWithOptId:(NSString *)optId Info:(NSArray *)info;
+- (void)groupDidGetUserGroupsSuccessWithOptId:(NSString *)optId info:(NSArray *)info;
 /**
  * @param type
  * @paramm reason
