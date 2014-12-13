@@ -13,6 +13,10 @@
 
 
 @interface LoginViewController ()
+{
+    CGPoint center;
+}
+@property (strong, nonatomic) IBOutlet UIView *loginView;
 @property (strong, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (strong, nonatomic) IBOutlet UITextField *userTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -48,17 +52,13 @@
 #endif
         CGRect keyboardBounds;
         [keyboardBoundsValue getValue:&keyboardBounds];
-        if (keyboardBounds.origin.y < _loginLabel.frame.origin.y + 30) {
+        if (keyboardBounds.origin.y < _loginView.frame.origin.y + _loginView.frame.size.height) {
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                self.view.center = CGPointMake(self.view.center.x, self.view.center.y - (_loginLabel.frame.origin.y - keyboardBounds.origin.y + 60));
-            } completion:nil];
-        }else{
-            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                 self.view.center = self.view.window.center;
+                CGFloat y =  _loginView.frame.origin.y + _loginView.frame.size.height - keyboardBounds.origin.y + 30;
+                self.view.center = CGPointMake(self.view.center.x, self.view.window.center.y - y);
             } completion:nil];
         }
     }
-    
 }
 - (void)keyBoardWillHide:(NSNotification *)notification{
     [_userTextField resignFirstResponder];

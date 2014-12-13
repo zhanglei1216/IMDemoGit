@@ -12,13 +12,13 @@
 #import "Contact.h"
 #import "IMHeader.h"
 
-typedef void(^GetUserGroupCompletion)(NSArray *);
-
+typedef void(^ GetUserGroupCompletion)(NSArray *);
+typedef void(^ CreateGroupCompletion) (NSDictionary *);
 
 
 @interface GroupModelHandle : NSObject <groupDelegate>
-
-- (void)getGroupModelWithOptId:(NSString *)optId Completion:(GetUserGroupCompletion)completion;
+- (void)createGroupWithIds:(NSArray *)ids completion:(CreateGroupCompletion)completion;
+- (void)getGroupModelWithOptId:(NSString *)optId completion:(GetUserGroupCompletion)completion;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (Group *)modelForRowAtIndexPath:(NSIndexPath *)indexPath;

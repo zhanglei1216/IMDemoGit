@@ -13,7 +13,7 @@
 @property (nonatomic, strong) GroupHandle *groupHandle;
 @property (nonatomic, strong) NSMutableArray *groupArray;
 @property (nonatomic, copy) GetUserGroupCompletion getUserGroupCompletion;
-
+@property (nonatomic, copy) CreateGroupCompletion createGroupCompletion;
 @end
 
 @implementation GroupModelHandle
@@ -26,15 +26,35 @@
     return self;
 }
 
-- (void)getGroupModelWithOptId:(NSString *)optId Completion:(GetUserGroupCompletion)completion{
+#pragma mark -
+#pragma mark - get data
+- (void)createGroupWithIds:(NSArray *)ids completion:(CreateGroupCompletion)completion{
+    [_groupHandle createGroupWithOptId:kUserName ids:ids];
+    self.createGroupCompletion = completion;
+}
+- (void)getGroupModelWithOptId:(NSString *)optId completion:(GetUserGroupCompletion)completion{
     [_groupHandle getUserGroupsInfoWithOptId:optId];
     self.getUserGroupCompletion = completion;
 }
 
-- (void)groupWillGetUserGroupsInfoWithOptId:(NSString *)optId{
-    NSLog(@"groupWillGetUserGroupsInfoWithOptId");
+
+#pragma mark -
+#pragma mark - groupHandle delegate
+- (void)groupWillCreateWithOptId:(NSString *)optId ids:(NSArray *)ids{
+    NSLog(@"groupWillCreate");
 }
-- (void)groupDidGetUserGroupsSuccessWithOptId:(NSString *)optId Info:(NSArray *)info{
+- (void)groupDidCreateSuccessOptId:(NSString *)optId ids:(NSArray *)ids result:(NSDictionary *)result{
+    if (_createGroupCompletion) {
+        _createGroupCompletion(result);
+    }
+}
+- (void)groupDidCreateFailWithType:(int)type reason:(NSString *)reason{
+    NSLog(@"groupDidCreateFail %@", reason);
+}
+- (void)groupWillGetUserGroupsInfoWithOptId:(NSString *)optId{
+    NSLog(@"groupWillGetUserGroupsInfo");
+}
+- (void)groupDidGetUserGroupsSuccessWithOptId:(NSString *)optId info:(NSArray *)info{
     [self.groupArray removeAllObjects];
     for (NSDictionary *dic in info) {@autoreleasepool{
         Group *group = [[Group alloc] init];
@@ -42,15 +62,19 @@
         [self.groupArray addObject:group];
     }
     }
+    NSLog(@"%@", _groupArray);
     if (_getUserGroupCompletion) {
         _getUserGroupCompletion(_groupArray);
     }
 }
 
-
 - (void)groupDidGetUserGroupsInfoFailWithType:(int)type reason:(NSString *)reason{
     NSLog(@"groupDidGetUserGroupsInfoFail  %@", reason);
 }
+
+
+#pragma mark -
+#pragma mark - data handle
 - (NSInteger)numberOfSections{
     return 1;
 }

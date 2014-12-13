@@ -14,4 +14,8 @@
 
 #endif
 
-#define kUrl @"http://192.168.100.151:8080"
+#define kUrl @"http://192.168.18.176:8080"
+#define kHost [[NSUserDefaults standardUserDefaults] objectForKey:@"host"]
+#define kPort [[[NSUserDefaults standardUserDefaults] objectForKey:@"port"] intValue]
+#define kUserName [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]
+#define kToken [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]

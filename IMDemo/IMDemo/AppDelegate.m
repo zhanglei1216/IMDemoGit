@@ -11,11 +11,6 @@
 #import "GroupListTableViewController.h"
 #import "ChatViewController.h"
 
-#define kHost [[NSUserDefaults standardUserDefaults] objectForKey:@"host"]
-#define kPort [[[NSUserDefaults standardUserDefaults] objectForKey:@"port"] intValue]
-#define kUserName [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]
-#define kToken [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]
-
 @interface AppDelegate ()
 {
     LoginViewController *loginVC;
@@ -73,6 +68,9 @@
     TokenRequestMessage *tokenMessage = [[TokenRequestMessage alloc] initWithId:[[NSUUID UUID] UUIDString] token:kToken];
     [_socket authorizeWithMessage:tokenMessage];
 }
+- (void)connectDidFailWithType:(int)type reason:(NSString *)reason{
+    NSLog(@"connectDidFail %@", reason);
+}
 - (void)authorizeWillBegin{
     NSLog(@"authorizeWillBegin");
 }
@@ -84,6 +82,15 @@
 }
 - (void)authorizeDidFailWithType:(int)type reason:(NSString *)reason{
     NSLog(@"authorizeDidFailWithType %d, %@", type, reason);
+}
+- (void)messageDidSendSuccess:(Message *)message{
+    NSLog(@"messageDidSendSuccess");
+}
+- (void)messageDidSendFail:(Message *)message{
+    NSLog(@"messageDidSendFail");
+}
+- (void)messageDidReceived:(Message *)message{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didReceivedMessage" object:message];
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

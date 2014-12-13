@@ -12,7 +12,8 @@
 #import "InputVIew.h"
 #import "IMHeader.h"
 #import "AppDelegate.h"
-#import "CellLabel.h"
+#import "LeftCellView.h"
+#import "rightCellView.h"
 
 #define kFaceViewHeight 150
 #define kInputViewHeight 44
@@ -55,6 +56,7 @@
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:@"didReceivedMessage" object:nil];
     
     _imagePicker = [[UIImagePickerController alloc] init];
     _imagePicker.delegate = self;
@@ -142,15 +144,34 @@
     return [_messageArray count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    UITableViewCell *cell = nil;
+    ChatMessage *message = [_messageArray objectAtIndex:indexPath.row];
+    if ([message.from isEqualToString:kUserName]) {
+        static NSString *identifier = @"rightCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[rightCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        [(rightCellView *)cell setValueWithMessage:message];
+    }else{
+        static NSString *identifier = @"leftCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[rightCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        [(LeftCellView *)cell setValueWithMessage:message];
     }
-    CellLabel *cellLabel = [[CellLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 60) chatText:[(TextChatMessage *)[_messageArray objectAtIndex:indexPath.row]  content]];
-    [cell addSubview:cellLabel];
+    
     return cell;
     
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = [CellLabelFrame rect:[(TextChatMessage *)[_messageArray objectAtIndex:indexPath.row] content]].size.height;
+    if (height < 60) {
+        return 80;
+    }else{
+        return height + 30;
+    }
 }
 - (void)sendMessage{
     TextChatMessage *textMessage = [[TextChatMessage alloc] initWithId:[[NSUUID UUID]  UUIDString] to:[NSString stringWithFormat:@"T#%@", _accountId] from:[NSString stringWithFormat:@"T#%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]] timestap:[[NSDate date] timeIntervalSince1970]];
@@ -159,6 +180,13 @@
     [appDelegate.socket sendMessage:textMessage];
     [_messageArray addObject:textMessage];
     [self.tableView reloadData];
+}
+- (void)didReceiveMessage:(NSNotification *)notification{
+    ChatMessage *message = notification.object;
+    if ([message.from isEqualToString:_accountId]) {
+        [_messageArray addObject:message];
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    }
 }
 - (void)hiddenKeyboard{
     [_inputView.inputTextField resignFirstResponder];

@@ -9,6 +9,7 @@
 #import "GroupListTableViewController.h"
 #import "GroupModelHandle.h"
 #import "ContactListTableViewController.h"
+#import "CreatGroupViewController.h"
 
 @interface GroupListTableViewController ()
 
@@ -30,13 +31,20 @@
     UIBarButtonItem *creatGroupButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createGroup)];
     self.navigationItem.rightBarButtonItem = creatGroupButton;
     self.groupModelHandle = [[GroupModelHandle alloc] init];
-    [_groupModelHandle getGroupModelWithOptId:[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"] Completion:^(NSArray * groupArray){
+    [_groupModelHandle getGroupModelWithOptId:kUserName completion:^(NSArray * groupArray){
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     }];
 
 }
 - (void)createGroup{
     
+    CreatGroupViewController *createGroupVC = [[CreatGroupViewController alloc] init];
+    createGroupVC.createCompletion = ^(){
+        [_groupModelHandle getGroupModelWithOptId:kUserName completion:^(NSArray * groupArray){
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        }];
+    };
+    [self presentViewController:createGroupVC animated:YES completion:nil];
 }
 
 

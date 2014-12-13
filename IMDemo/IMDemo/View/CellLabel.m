@@ -9,10 +9,10 @@
 #import "CellLabel.h"
 #define BEGIN_FLAG @"["
 #define END_FLAG @"]"
-#define KFacialSizeWidth  18
-#define KFacialSizeHeight 18
+#define KFacialSizeWidth  24
+#define KFacialSizeHeight 24
 #define MAX_WIDTH 150
-#define LINESPACE 18
+#define LINESPACE 24
 @implementation CellLabel
 
 - (id)initWithFrame:(CGRect)frame
@@ -28,7 +28,6 @@
     self = [self initWithFrame:frame];
     if (self) {
         self.chatText = chatText;
-        self.frame = [self rect:chatText];
     }
     return self;
 }
@@ -71,7 +70,7 @@
     NSMutableArray *array = [[NSMutableArray alloc] init];
     [self getImageRange:message :array];
     NSArray *data = array;
-    UIFont *fon = [UIFont systemFontOfSize:13.0f];
+    UIFont *fon = [UIFont systemFontOfSize:18.0f];
     CGFloat upX = 0;
     CGFloat upY = 0;
     CGFloat X = 0;
@@ -119,7 +118,7 @@
     NSMutableArray *array = [[NSMutableArray alloc] init];
     [self getImageRange:message :array];
     NSArray *data = array;
-    UIFont *fon = [UIFont systemFontOfSize:13.0f];
+    UIFont *fon = [UIFont systemFontOfSize:18.0f];
     CGFloat upX = 0;
     CGFloat upY = 0;
     CGFloat X = 0;
@@ -181,7 +180,7 @@
 
 - (void)drawText:(NSString *)text rect:(CGRect)rect
 {
-    UIFont *fon = [UIFont systemFontOfSize:13.0f];
+    UIFont *fon = [UIFont systemFontOfSize:18.0f];
     [text drawInRect:rect withFont:fon];
 }
 
