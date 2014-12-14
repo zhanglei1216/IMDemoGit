@@ -146,7 +146,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = nil;
     ChatMessage *message = [_messageArray objectAtIndex:indexPath.row];
-    if ([message.from isEqualToString:kUserName]) {
+    if ([message.from isEqualToString:[NSString stringWithFormat:@"T#%@", kUserName]]) {
         static NSString *identifier = @"rightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
@@ -157,7 +157,7 @@
         static NSString *identifier = @"leftCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
-            cell = [[rightCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[LeftCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
         [(LeftCellView *)cell setValueWithMessage:message];
     }
@@ -174,7 +174,8 @@
     }
 }
 - (void)sendMessage{
-    TextChatMessage *textMessage = [[TextChatMessage alloc] initWithId:[[NSUUID UUID]  UUIDString] to:[NSString stringWithFormat:@"T#%@", _accountId] from:[NSString stringWithFormat:@"T#%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"]] timestap:[[NSDate date] timeIntervalSince1970]];
+    TextChatMessage *textMessage = [[TextChatMessage alloc] initWithId:[[NSUUID UUID]  UUIDString] to:[NSString stringWithFormat:@"T#%@", _accountId] from:[NSString stringWithFormat:@"T#%@", kUserName] timestap:[[NSDate date] timeIntervalSince1970]];
+    NSLog(@"%@", textMessage.to);
     textMessage.content = _inputView.inputTextField.text;
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate.socket sendMessage:textMessage];
@@ -183,7 +184,7 @@
 }
 - (void)didReceiveMessage:(NSNotification *)notification{
     ChatMessage *message = notification.object;
-    if ([message.from isEqualToString:_accountId]) {
+    if ([message.from isEqualToString:[NSString stringWithFormat:@"T#%@", _accountId]]) {
         [_messageArray addObject:message];
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     }
